@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/omniroot/production-packet-v0.1.schema.json",
+  "title": "OmniRoot scoped production packet (illustrative)",
+  "description": "Use only with explicit, enforced customer grants and signed production files in a real deployment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "work_order_id",
+    "design_version_id",
+    "fabric_sku",
+    "relevant_fit",
+    "authorized_fields",
+    "demo_only"
+  ],
+  "properties": {
+    "work_order_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "design_version_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fabric_sku": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cut": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "relevant_fit": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9_]+$"
+      },
+      "additionalProperties": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      }
+    },
+    "authorized_fields": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "customer_identity": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "measurement_grant_expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "demo_only": {
+      "const": true
+    }
+  }
+}
