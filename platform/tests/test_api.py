@@ -43,11 +43,14 @@ def test_public_catalog_and_health(client):
 
 def test_session_cookie_security_and_access(client):
     assert client.get("/api/fit-profile").status_code == 401
-    user = create_user(client)
+    response = client.post("/api/auth/register", json={"email":"test@example.com", "password":"long-unique-password-123"})
+    assert response.status_code == 201
+    user = response.json()
+    assert "httponly" in response.headers["set-cookie"].lower()
+    assert "samesite=lax" in response.headers["set-cookie"].lower()
     assert client.get("/api/me").json()["email"] == "test@example.com"
-    cookies = client.cookies
-    assert "omniroot_session" in cookies
-    assert "httponly" in client.post("/api/auth/logout", headers=csrf(user)).headers["set-cookie"].lower()
+    assert "omniroot_session" in client.cookies
+    assert client.post("/api/auth/logout", headers=csrf(user)).status_code == 200
     assert client.get("/api/me").status_code == 401
 
 
