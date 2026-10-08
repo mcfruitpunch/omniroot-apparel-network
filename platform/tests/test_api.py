@@ -100,8 +100,8 @@ def test_design_rights_export_and_account_erasure(client):
     assert client.post("/api/designs", headers=csrf(user), json=submission).status_code == 201
     assert len(client.get("/api/designs").json()["designs"]) == 1
     assert client.get("/api/export").json()["designs"][0]["name"] == "Ribbon Jacket"
-    assert client.delete("/api/account", headers=csrf(user), json={"password": "wrong-password"}).status_code == 403
-    assert client.delete("/api/account", headers=csrf(user), json={"password": "long-unique-password-123"}).json()["deleted"]
+    assert client.request("DELETE", "/api/account", headers=csrf(user), json={"password": "wrong-password"}).status_code == 403
+    assert client.request("DELETE", "/api/account", headers=csrf(user), json={"password": "long-unique-password-123"}).json()["deleted"]
     assert client.get("/api/me").status_code == 401
     assert client.post("/api/auth/login", json={"email": "test@example.com","password": "long-unique-password-123"}).status_code == 401
 
