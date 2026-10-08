@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="OmniRoot Apparel — personalized clothing, open to every body.">
+  <title>OmniRoot Apparel · Platform Alpha</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="OmniRoot Apparel home"><span class="mark">O</span><span>OMNIROOT <small>APPAREL NETWORK</small></span></a>
+    <nav aria-label="Platform navigation">
+      <button type="button" data-view="shop" aria-current="page">Explore</button>
+      <button type="button" data-view="fit">Fit Passport</button>
+      <button type="button" data-view="requests">My requests</button>
+      <button type="button" data-view="designer">Designer studio</button>
+      <button type="button" data-view="account">Account</button>
+    </nav>
+    <span class="alpha">PLATFORM ALPHA</span>
+  </header>
+
+  <main id="main">
+    <div id="status" role="status" aria-live="polite"></div>
+    <section id="shop" class="view">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">CLOTHING MADE FOR PEOPLE</span>
+          <h1>Your shape.<br><em>Your fabric.</em><br>Your future.</h1>
+          <p>A new kind of apparel network, starting with an open and flexible design catalog. Browse possibilities, share what fits you, and help shape what we build next.</p>
+          <button class="primary" type="button" data-view="fit">Create your Fit Passport <span aria-hidden="true">↗</span></button>
+          <p class="disclaimer">Research-stage designs only. This is not a store checkout or production commitment.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="art-circle"></div><div class="art-shirt"><div class="collar"></div><div class="seam"></div></div><span class="art-badge">FIT FIRST<br>NO GUESSWORK</span></div>
+      </div>
+      <div class="section-title"><div><span class="eyebrow">THE EARLY COLLECTION</span><h2>Starting with what matters.</h2></div><p>Two garment types and two example textiles. Every real material and pattern must be professionally tested before production.</p></div>
+      <div id="garments" class="catalog-grid"></div>
+      <section class="pillars" aria-label="What we're creating">
+        <article><span>01 /</span><h3>Fit is personal</h3><p>Your saved measurements stay in your account. They are not shared with makers through this alpha.</p></article>
+        <article><span>02 /</span><h3>Design belongs to creators</h3><p>Creators can submit ideas for a future technical review and rights process.</p></article>
+        <article><span>03 /</span><h3>Made with people</h3><p>Future manufacturing will depend on verified patterns and fairly compensated clothing makers.</p></article>
+      </section>
+    </section>
+
+    <section id="fit" class="view" hidden>
+      <div class="page-heading"><span class="eyebrow">YOUR PRIVATE FIT PASSPORT</span><h1>Measurements that travel with you.</h1><p>Save a small set of measurements to request garments. Centimeters only for this first implementation. Values are self-reported unless measured by a professional, and do not guarantee fit.</p></div>
+      <div class="two-col">
+        <form id="fit-form" class="panel">
+          <h2>Body measurements <span class="subtle">/ cm</span></h2>
+          <div class="form-grid">
+            <label>Chest circumference (cm)<input name="chest_cm" type="number" min="20" max="250" step="0.1" placeholder="e.g. 102" inputmode="decimal"></label>
+            <label>Waist circumference (cm)<input name="waist_cm" type="number" min="20" max="250" step="0.1" placeholder="e.g. 86" inputmode="decimal"></label>
+            <label>Hip circumference (cm)<input name="hip_cm" type="number" min="20" max="250" step="0.1" placeholder="e.g. 104" inputmode="decimal"></label>
+            <label>Inseam (cm)<input name="inseam_cm" type="number" min="20" max="250" step="0.1" placeholder="e.g. 79" inputmode="decimal"></label>
+            <label>Measurement source<select name="method"><option value="self_reported">Measured by me</option><option value="professional">Measured by a professional</option></select></label>
+            <label>Fit preference<select name="preference"><option value="regular">Regular</option><option value="relaxed">Relaxed</option><option value="tailored">Tailored</option></select></label>
+          </div>
+          <div class="actions"><button class="primary" type="submit">Save private profile</button><button class="ghost danger" type="button" id="delete-fit">Delete profile</button></div>
+          <p id="fit-meta" class="subtle"></p>
+        </form>
+        <aside class="info-panel"><div class="info-icon" aria-hidden="true">◎</div><h3>Good fitting starts with better information.</h3><p>For now, this is a personal record, not a professional fitting service. We will develop measurement instructions and support for mobility and sensory preferences alongside clothing makers and customers.</p><p><strong>Privacy boundary:</strong> A garment request stores a reference to your profile, but its measurements are not sent to any makers in this version.</p></aside>
+      </div>
+    </section>
+
+    <section id="requests" class="view" hidden>
+      <div class="page-heading"><span class="eyebrow">CUSTOMER PORTAL</span><h1>What you've requested.</h1><p>These are expressions of interest, not actual orders. There is no payment, promise of manufacture, or delivery estimate.</p></div>
+      <div id="request-list" class="stack"></div>
+    </section>
+
+    <section id="designer" class="view" hidden>
+      <div class="page-heading"><span class="eyebrow">INDEPENDENT DESIGNER STUDIO</span><h1>Ideas deserve a path to reality.</h1><p>Submit an original design concept for future review. Concepts do not become purchasable automatically, and this alpha does not accept pattern files or images.</p></div>
+      <div class="two-col">
+        <form id="designer-form" class="panel">
+          <h2>Submit a design concept</h2>
+          <label>Name<input name="name" minlength="3" maxlength="100" required placeholder="A name for your piece"></label>
+          <label>Describe the cut, features and intended materials<textarea name="description" minlength="12" maxlength="1000" rows="5" required placeholder="Tell us what makes this piece yours"></textarea></label>
+          <label class="check"><input type="checkbox" name="rights_confirmed" required><span>I confirm I own or have permission to submit this concept.</span></label>
+          <button class="primary" type="submit">Send to review queue</button>
+        </form>
+        <div><h2>My submissions</h2><div id="design-list" class="stack"></div></div>
+      </div>
+    </section>
+
+    <section id="account" class="view" hidden>
+      <div class="page-heading"><span class="eyebrow">OWN YOUR INFORMATION</span><h1>Your account, your control.</h1><p>Access to your saved measurements and requests is restricted to your signed-in account.</p></div>
+      <div id="signed-out" class="two-col">
+        <form id="register-form" class="panel">
+          <h2>Create account</h2>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Password (12+ characters)<input type="password" name="password" minlength="12" autocomplete="new-password" required></label>
+          <button type="submit" class="primary">Create account</button>
+        </form>
+        <form id="login-form" class="panel">
+          <h2>Already have an account?</h2>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Password<input type="password" name="password" minlength="12" autocomplete="current-password" required></label>
+          <button type="submit" class="secondary">Sign in</button>
+        </form>
+      </div>
+      <div id="signed-in" class="two-col" hidden>
+        <div class="panel"><h2>Signed in</h2><p id="account-email"></p><div class="actions"><button type="button" id="export-data" class="secondary">Export my information</button><button type="button" id="logout" class="ghost">Sign out</button></div></div>
+        <form id="delete-account-form" class="panel panel-danger"><h2>Delete account</h2><p>Delete all your account records, saved profiles, design submissions and requests from this application database. Backups, once configured, will require an explicit retention policy.</p><label>Confirm your password<input type="password" name="password" required autocomplete="current-password"></label><button type="submit" class="danger-btn">Permanently delete account</button></form>
+      </div>
+    </section>
+  </main>
+  <footer><span>© OMNIROOT APPAREL — RESEARCH PLATFORM</span><span>Built around agency, craft, and better-fitting systems.</span><a href="/api/docs">API reference ↗</a></footer>
+</div>
+</body>
+</html>
