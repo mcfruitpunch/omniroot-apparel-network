@@ -124,3 +124,17 @@ def test_no_customer_measurements_in_request_response(client):
     assert res.status_code == 201
     output = str(client.get("/api/requests").json())
     assert "137" not in output and "149" not in output
+
+
+def test_browser_entry_and_assets(client):
+    page = client.get("/")
+    assert page.status_code == 200
+    assert "OmniRoot Apparel" in page.text
+    assert 'id="fit-form"' in page.text
+    assert "frame-ancestors 'none'" in page.headers["Content-Security-Policy"]
+    client_script = client.get("/assets/app.js")
+    assert client_script.status_code == 200
+    assert "await api" in client_script.text
+    styles = client.get("/assets/style.css")
+    assert styles.status_code == 200
+    assert "@media" in styles.text
