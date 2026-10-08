@@ -54,3 +54,19 @@ See [GitHub launch checklist](docs/GITHUB_SETUP.md) for the planned repository, 
 ## Contributing / licensing
 
 The repository is intended to support later collaborative development. A software/content license has **not** yet been selected. Do not assume that public access grants redistribution rights; confirm ownership and licensing before accepting contributed designs, patterns, or imagery.
+
+## New: Persistent platform alpha (v0.2)
+
+The original \`index.html\` remains a standalone, browser-only conceptual prototype for GitHub Pages.
+
+**Actual software now lives in [\`platform/\`](platform/README.md)**: a Python/FastAPI app with accounts, private saved fit profiles, a research catalog, designer concept intake, and persisted garment feasibility requests. It includes an accessible web interface, SQLite development storage, API security tests and a Dockerfile.
+
+Run it locally:
+
+\`\`\`sh
+cd platform
+python -m pip install -r requirements.txt
+python -m uvicorn server:app --reload
+\`\`\`
+
+Visit \`http://127.0.0.1:8000\`. Do not enter real sensitive body measurements into an unreviewed public deployment. This app is alpha software and is **not** yet a production-ready marketplace. GitHub Pages cannot host this server-backed app.
