@@ -17,3 +17,7 @@ Thumbs.db
 .env.*
 !.env.example
 exports/
+
+# Persisted application databases and transient SQLite files
+*.sqlite3
+*.sqlite3-*
